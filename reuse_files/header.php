@@ -23,7 +23,8 @@
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
   <!-- Font Awesome Icons -->
   <link rel="stylesheet" href="<?php echo FRONT_SITE_PATH ?>plugins/fontawesome-free/css/all.min.css">
-  <link rel="stylesheet" type="text/css" href="<?php echo FRONT_SITE_PATH ?>CSS/jquery.countdownTimer.css" />
+    <!-- daterange picker -->
+  <link rel="stylesheet" href="<?php echo FRONT_SITE_PATH ?>plugins/daterangepicker/daterangepicker.css">
  <!-- DataTables -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.2/css/bootstrap.css">
     <link rel="stylesheet" href="https://cdn.datatables.net/1.10.22/css/dataTables.bootstrap4.min.css">
