@@ -6,6 +6,13 @@
     <div class="content-wrapper">
  <?php
   if (isset($_GET['action']) && $_GET['action']!=''  && $_GET['action']=='viewall') {
+
+    if (isset($_GET['delete_employee'])  && $_GET['delete_employee']>0) {
+      $delete_employee_id=get_safe_value($_GET['delete_employee']);
+      mysqli_query($con,"delete from employees where id='$delete_employee_id'");
+      mysqli_query($con,"delete from employee_child_details where employee_id='$delete_employee_id'");
+      redirect('features?action=viewall');
+    }
     ?>
     
       <!-- Content Header (Page header) -->
@@ -84,7 +91,7 @@
                   <td><?= $value['emp_adhar_no'] ?></td>
                   <td><?= $value['emp_bank_account_no'] ?></td>
                    <td class="project-actions">
-                          <a class="btn btn-primary btn-sm" href="features?action1=view_employee&id=<?= $value['id'] ?>">
+                          <a class="btn btn-primary btn-sm" href="features?action2=view_employee&id=<?= $value['id'] ?>">
                               <i class="fas fa-folder">
                               </i>
                               View
@@ -94,7 +101,7 @@
                               </i>
                               Edit
                           </a>
-                          <a class="btn btn-danger btn-sm" href="#">
+                          <a class="btn btn-danger btn-sm" href="#" onclick="remove_employee('<?php echo $value['emp_name'] ?>', '<?= $value['id']?>')">
                               <i class="fas fa-trash">
                               </i>
                               Delete
@@ -111,7 +118,6 @@
                 <th>Profile</th>
                 <th>Employee Name</th>
                 <th>Adhar No.</th>
-                <th>Pan No.</th>
                 <th>A/c No.</th>
                 <th></th>
             </tr>
@@ -290,8 +296,9 @@ if(mysqli_num_rows(mysqli_query($con,$sql))>0){
               mysqli_query($con,"insert into employee_child_details(employee_id,emp_child_name,emp_child_dob,emp_child_age,emp_child_status) values('$eid','$emp_child_name_db','$emp_child_dob_db','$emp_child_age_db',1)");
               $_SESSION['success_data_exist'] = "Employee Data Inserted";
             }  
-          redirect('features?action=viewall');
         }
+          redirect('features?action=viewall');
+
       }
      else {
       $emp_profile_update  ='';
@@ -337,8 +344,7 @@ if(mysqli_num_rows(mysqli_query($con,$sql))>0){
     }
    } 
     ?>
-
-
+    
       <div class="container-fluid">
        <!-- Content Header (Page header) -->
         <section class="content-header">
@@ -367,6 +373,9 @@ if(mysqli_num_rows(mysqli_query($con,$sql))>0){
               <!-- form start -->
               <form id="add_new_employee" method="post" action="" enctype="multipart/form-data" name="add_new_employee">
                 <div class="card-body">
+                  <div class="card-footer">
+                        <button type="submit" name="upload_new_employee" class="btn btn-primary float-right">Upload</button>
+                  </div>
                   <div class="form-group">
                     <div class="row">
                       <div class="col-sm-12 col-md-6 mt-2 form-group">
@@ -644,6 +653,200 @@ if(mysqli_num_rows(mysqli_query($con,$sql))>0){
       <input type="hidden" id="add_more" value="1"/>
     </div>
     <?php
+      }elseif (isset($_GET['action2']) && $_GET['action2']!=''  && $_GET['action2']=='view_employee' && isset($_GET['id']) && $_GET['id']>0) {
+        $id = get_safe_value($_GET['id']);
+        $get_employee_detailsByid = get_employee_detailsByid($id);
+        $getChildDetailsByEmpId = getChildDetailsByEmpId($id);
+        $totalChildofEmpByid = totalChildofEmpByid($id);
+        if ($_GET['id'] != $get_employee_detailsByid['id']) {
+          redirect("index");
+        }
+        ?>
+        <div class="container"  >
+          <section class="content-header">
+            <div class="card-header">
+                            <button type="button" class="btn btn-success float-sm-right btnsk" ><i class="fa fa-print"></i>  Print</button>
+            </div>
+          </section>
+              <div class="row">
+                <!-- left column -->
+                <div class="col-sm-12 col-md-12">
+                  <!-- jquery validation -->
+                  <div class="card card-primary" id="printarea">
+                      <div class="row">
+                        <div class="col-sm-12  col-lg-12" style="display: flex">
+                          <div class="card-body box-profile mt-2">
+                              <div class="text-center">
+                                <a href="<?php echo FRONT_SITE_PATH.'media/employee_profile/'.$get_employee_detailsByid['emp_image'] ?>" target="_blank">
+                                  <img class="profile-user-img"
+                                     src="<?php echo FRONT_SITE_PATH.'media/employee_profile/'.$get_employee_detailsByid['emp_image'] ?>"
+                                     alt="User profile picture" style="height: 180px;width: 150px">
+                                   </a>
+                                    <h3 class="profile-username text-center">Employee Profiile</h3>
+                              </div>
+                            </div>
+
+                            <div class="card-body box-profile mt-2">
+                              <div class="text-center">
+                                <a href="<?php echo FRONT_SITE_PATH.'media/employee_signature/'.$get_employee_detailsByid['emp_sign_upload'] ?>" target="_blank">
+                                  <img class="profile-user-img"
+                                     src="<?php echo FRONT_SITE_PATH.'media/employee_signature/'.$get_employee_detailsByid['emp_sign_upload'] ?>"
+                                     alt="User profile picture" style="height: 180px;width: 150px">
+                                </a>
+                                    <h3 class="profile-username text-center">Employee Signature</h3>
+                              </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-12 col-md-12">
+                          <div class="card-header">
+                            <H4>Personal Details</H4>
+                          </div>
+                          <table class="table  table-borderless text-center" style="width:100%">
+                          <thead>
+                              <tr>
+                                  <th>Employee Name/DOB</th>
+                                  <td ><?= $get_employee_detailsByid['emp_name'] ?> /  <?= $get_employee_detailsByid['emp_dob'] ?></td>
+                              </tr>
+
+                              <tr>
+                                  <th>MARTIAL STATUS</th>
+                                  <td ><?= $get_employee_detailsByid['emp_martial_status'] ?></td>
+                              </tr>
+                              <tr>
+                                  <th >Date of Joining</th>
+                                  <td ><?= $get_employee_detailsByid['emp_date_of_joining'] ?></td>
+                              </tr>
+                              <tr>
+                                  <th >Date of leaving</th>
+                                  <td ><?= $get_employee_detailsByid['emp_date_of_leaving'] ?></td>
+                              </tr>
+                              <tr>
+                                  <th >location/site</th>
+                                  <td ><?= $get_employee_detailsByid['location_site'] ?></td>
+                              </tr>
+                              <tr>
+                                  <th >present Address</th>
+                                  <td ><?= $get_employee_detailsByid['present_address'] ?> - <?= $get_employee_detailsByid['present_pincode'] ?></td>
+                              </tr>
+                              <tr>
+                                  <th >permament address</th>
+                                  <td ><?= $get_employee_detailsByid['permanent_address'] ?> - <?= $get_employee_detailsByid['permanent_pincode'] ?></td>
+                              </tr>
+                              <tr>
+                                  <th >Mobile NO 1/mobile no 2</th>
+                                  <td ><?= $get_employee_detailsByid['mn_no_1'] ?> / <?= $get_employee_detailsByid['mb_no_2'] ?></td>
+                              </tr>
+                          </thead>
+                           </table> 
+
+                         <div class="card-header">
+                            <H4>Family Details</H4>
+                          </div>
+                          <table class="table  table-borderless text-center" style="width:100%">
+                          <thead>
+                              <tr>
+                                  <th >father name/DOB/age</th>
+                                  <td ><?= $get_employee_detailsByid['emp_father_name'] ?> / <?= $get_employee_detailsByid['emp_father_dob'] ?> / <?= $get_employee_detailsByid['emp_father_age'].' years ' ?></td>
+                              </tr>
+
+                              <!-- Mother -->
+                              <tr>
+                                  <th >Mother name/DOB/age</th>
+                                  <td ><?= $get_employee_detailsByid['emp_mother_name'] ?> / <?= $get_employee_detailsByid['emp_mother_dob'] ?> / <?= $get_employee_detailsByid['emp_mother_age'].' years ' ?></td>
+                              </tr>
+
+                              <!-- wife -->
+                              <tr>
+                                  <th >wife name/DOB/age</th>
+                                  <td ><?= $get_employee_detailsByid['emp_wife_name'] ?>/<?= $get_employee_detailsByid['emp_wife_dob'] ?>/<?= $get_employee_detailsByid['emp_wife_age'].' years ' ?></td>
+                              </tr>
+                          </thead>
+                           </table> 
+
+
+                          <div class="card-header">
+                            <H4><?= $totalChildofEmpByid; ?> Children</H4>
+                          </div>
+                          <table class="table  table-borderless text-center" style="width:100%">
+                          <thead>
+                           <?php
+                              $i = 0;
+                                foreach($getChildDetailsByEmpId as $list){
+                                  $i++;
+                                  ?>
+                                <tr>
+                                  <th >Child name <?= $i ?>/DOB/age</th>
+                                  <td ><?= $list['emp_child_name'] ?>/<?= $list['emp_child_dob'] ?>/<?= $list['emp_child_age'].' years ' ?></td>
+                              </tr>
+                                <?php
+                                }
+                            ?> 
+                           </thead>
+                         </table> 
+                            
+                           <div class="card-header">
+                            <H4>Government ID</H4>
+                          </div>
+                          <table class="table  table-borderless text-center" style="width:100%">
+                          <thead>
+                              <tr>
+                                  <th width="30%">Provident Fund/Universal Account Number</th>
+                                  <td ><?= $get_employee_detailsByid['pf_no_uan_no'] ?></td>
+                              </tr>
+
+                              <tr>
+                                  <th>Employee State Insurance Corporation</th>
+                                  <td ><?= $get_employee_detailsByid['esic_no'] ?></td>
+                              </tr>
+                              <tr>
+                                  <th >Aadhar Number</th>
+                                  <td ><?= $get_employee_detailsByid['emp_adhar_no'] ?></td>
+                              </tr>
+                              <tr>
+                                  <th >Election id no</th>
+                                  <td ><?= $get_employee_detailsByid['emp_election_id_no'] ?></td>
+                              </tr>
+                              <tr>
+                                  <th >passport no</th>
+                                  <td ><?= $get_employee_detailsByid['emp_passport_no'] ?></td>
+                              </tr>
+                              <tr>
+                                  <th >Pan card no</th>
+                                  <td ><?= $get_employee_detailsByid['emp_pan_no'] ?></td>
+                              </tr>
+                                </thead>
+                           </table>
+
+                          <div class="card-header">
+                            <H4>Bank Details</H4>
+                          </div>
+                          <table class="table  table-borderless text-center" style="width:100%">
+                          <thead>
+                              <tr>
+                                  <th >Bank Account holder name</th>
+                                  <td ><?= $get_employee_detailsByid['emp_name_of_bank_account_holder'] ?></td>
+                              </tr>
+                              <tr>
+                                  <th >Bank account no</th>
+                                  <td ><?= $get_employee_detailsByid['emp_bank_account_no'] ?></td>
+                              </tr>
+                              <tr>
+                                  <th >ifsc code</th>
+                                  <td ><?= $get_employee_detailsByid['emp_bank_ifsc_code'] ?></td>
+                              </tr>
+                          </thead>
+                           </table> 
+
+                           <div class="card-footer">
+                            <button type="button" class="btn btn-success float-sm-right btnsk" id="btnsk"><i class="fa fa-print"></i>  Print</button>
+                          </div>
+                        </div>
+                      </div>
+                  </div>
+                </div>  
+              </div>
+         </div>    
+        <?php
       }else
       { redirect("index"); }
     ?>
@@ -654,11 +857,29 @@ if(mysqli_num_rows(mysqli_query($con,$sql))>0){
 <?php
 include 'reuse_files/footer.php';
 ?>
+
+
+
+
   <script>
 $(document).ready(function() {
     $('#example').DataTable( {
-        fixedHeader: true
+        "fixedHeader": true,
+        "responsive": true,
+        "autoWidth": true,
     } );
+
+    $(".btnsk").click(function () {
+    //Hide all other elements other than printarea.
+    $(this).hide();
+    $("#btnsk").hide();
+    $(".main-footer").hide();
+    $("#printarea").show();
+    window.print();
+    $(this).show();
+    $("#btnsk").show();
+    $(".main-footer").show();
+});
 });
 
   function add_more(){
@@ -678,6 +899,14 @@ $(document).ready(function() {
       if(result==true){
         var cur_path=window.location.href;
         window.location.href=cur_path+"&delete_child="+id;
+      }
+    }
+
+     function remove_employee(emp_name,id){
+      var result=confirm('Do you want to delete '+emp_name+'?');
+      if(result==true){
+        var cur_path=window.location.href;
+        window.location.href=cur_path+"&delete_employee="+id;
       }
     }
 </script>

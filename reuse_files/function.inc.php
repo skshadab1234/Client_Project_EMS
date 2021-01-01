@@ -39,3 +39,45 @@ function get_safe_value($str){
 	return $str;
 }
 
+function get_employee_detailsByid($id)
+{
+	global $con;
+	$sql=mysqli_query($con,"SELECT * From employees where id = '$id'");
+	$row = mysqli_fetch_assoc($sql);
+	return $row;
+}
+
+function getChildDetailsByEmpId($id){
+	global $con;
+	$arr=array();
+	$res=mysqli_query($con,"select * from employee_child_details where employee_id='$id'");
+	while($row=mysqli_fetch_assoc($res)){
+		$arr[]=$row;
+	}
+	return $arr;
+}
+
+
+function totalChildofEmpByid($id)
+{
+	global $con;
+	$res=mysqli_query($con,"select count(*) as total_child from employee_child_details where employee_id='$id'");
+	$row=mysqli_fetch_assoc($res);
+	return $row['total_child'];
+}
+
+function TotalEmployee($status=1)
+{
+	global $con;
+	$res=mysqli_query($con,"select count(*) as TotalEmployee from employees where emp_status='$status'");
+	$row=mysqli_fetch_assoc($res);
+	return $row['TotalEmployee'];
+}
+
+function married_emp($martial_status)
+{
+	global $con;
+	$res=mysqli_query($con,"select count(*) as married from employees where emp_martial_status='$martial_status'");
+	$row=mysqli_fetch_assoc($res);
+	return $row['married'];
+}
