@@ -874,7 +874,7 @@ if(mysqli_num_rows(mysqli_query($con,$sql))>0){
 include 'reuse_files/footer.php';
 ?>
 
-<script>
+w<script>
 $(document).ready(function() {
     $('#example').DataTable( {
         "fixedHeader": true,

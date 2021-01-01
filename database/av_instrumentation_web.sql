@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Dec 31, 2020 at 03:42 PM
+-- Generation Time: Jan 01, 2021 at 04:45 PM
 -- Server version: 10.1.38-MariaDB
 -- PHP Version: 7.3.2
 
@@ -70,9 +70,7 @@ CREATE TABLE `employees` (
 --
 
 INSERT INTO `employees` (`id`, `emp_image`, `emp_sign_upload`, `emp_name`, `emp_dob`, `emp_martial_status`, `emp_date_of_joining`, `emp_date_of_leaving`, `location_site`, `pf_no_uan_no`, `esic_no`, `present_address`, `present_pincode`, `permanent_address`, `permanent_pincode`, `mn_no_1`, `mb_no_2`, `emp_adhar_no`, `emp_election_id_no`, `emp_passport_no`, `emp_pan_no`, `emp_name_of_bank_account_holder`, `emp_bank_account_no`, `emp_bank_ifsc_code`, `emp_father_name`, `emp_father_dob`, `emp_father_age`, `emp_mother_name`, `emp_mother_dob`, `emp_mother_age`, `emp_wife_name`, `emp_wife_dob`, `emp_wife_age`, `emp_status`) VALUES
-(18, '321710954_Religious Minorty Candidate.jpg', '663147163_Religious Minorty Candidate.jpg', 'MEHTAB KHAN', '2000-12-20', 'married', '2020-10-20', '2020-10-20', 'asasasa', 'MHBAN00000640000000121', '3100000011A2SASASAS2', 'Sayeed Manzil, Room no 104,\r\nKasua, Mumbra', 400612, 'Sayeed Manzil, Room no 104,\r\nKasua, Mumbra', 400612, '9168754858', '9168754858', '916875485812', '9168754858', '1245789', '9168754858', 'sHADAB Khnasasas sa', '9168754858', 'MAHB00001401', 'ABDUL HAI1', '2020-12-21', 52, 'ABDUL HAI1', '2020-12-21', 56, 'ABDUL HAI1', '2020-12-21', 56, 1),
-(21, '199602669_Desert.jpg', '455157591_Hydrangeas.jpg', 'SHADAB KHAN', '2000-12-20', 'unmarried', '2020-10-20', '2020-10-20', 'asasasa', 'MH2AN000006140000000121', '3100000011A2SASASAS3', 'Sayeed Manzil, Room no 104,\\\\\\\\r\\\\\\\\nKasua, Mumbra', 400612, 'Sayeed Manzil, Room no 104,\\\\\\\\r\\\\\\\\nKasua, Mumbra', 400612, '9368754858', '9368754858', '936875485842', '9368754858', '9368754', '9368754858', 'sHADAB Khnasasas sa', '9368754858', 'MAHB00001401', 'ABDUL HAI1', '2020-12-21', 56, 'ABDUL HAI1', '2020-12-21', 56, 'ABDUL HAI1', '2020-12-21', 56, 1),
-(22, '793148693_DPLOMA TY MARKSHEET.jpg', '562663649_Religious Minorty Candidate.jpg', 'SHADAB Alam', '2000-12-20', 'unmarried', '2020-10-20', '2020-10-20', 'mumbai', 'MAHB0000000001221212142', '3100000011A2SASASA21', 'Sayeed Manzil, Room no 104,\r\nKasua, Mumbra', 400612, 'Sayeed Manzil, Room no 104,\r\nKasua, Mumbra', 400612, '8168754858', '8168754858', '816875485811', '8168754858', '124578d', '8168754858', 'sHADAB Khnasasas sa', '8168754858', 'MAHB00001401', 'ABDUL HAI1', '2020-12-21', 52, 'ABDUL HAI1', '2020-12-21', 56, 'ABDUL HAI1', '2020-12-21', 56, 1);
+(1, '392433077_1.jpg', '874389156_AdyshevMM-signature.png', 'SHADAB Alam', '2000-04-30', 'married', '2021-01-20', '2021-11-15', 'mumbai', 'MAHB0000000001221213232', '3100000011A2SASASAS2', 'Sayeed Manzil, Room no 104,\r\nKasua, Mumbra', 400612, 'Sayeed Manzil, Room no 104,\r\nKasua, Mumbra', 400612, '9168754858', '9168754858', '916875485812', 'M2KLM01234', 'J21K821', 'HDIPS12345', 'SHADABALAM JAMAL AHMED KHAN', '68033277585', 'MAHB00001401', 'JAMAL AHMED', '1975-11-20', 55, 'JASIMUNNISA', '1977-04-25', 53, 'XYZABC', '2002-12-21', 18, 1);
 
 -- --------------------------------------------------------
 
@@ -94,11 +92,9 @@ CREATE TABLE `employee_child_details` (
 --
 
 INSERT INTO `employee_child_details` (`id`, `employee_id`, `emp_child_name`, `emp_child_dob`, `emp_child_age`, `emp_child_status`) VALUES
-(25, 21, 'Sohail1', '2020-12-16', 25, 1),
-(40, 22, 'kalu', '2020-12-21', 15, 0),
-(41, 22, 'kalu', '2020-12-21', 15, 0),
-(42, 22, 'kalu', '2020-12-21', 15, 0),
-(43, 18, 'RAHUL', '2020-12-21', 26, 0);
+(1, 1, 'Sohail', '2020-12-21', 1, 1),
+(2, 1, 'Sahil', '2018-12-21', 2, 1),
+(3, 1, 'XYZ', '2019-11-30', 2, 1);
 
 -- --------------------------------------------------------
 
@@ -154,13 +150,13 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `employees`
 --
 ALTER TABLE `employees`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `employee_child_details`
 --
 ALTER TABLE `employee_child_details`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=44;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `users`
