@@ -18,18 +18,6 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title><?php echo FRONT_SITE_NAME ?></title>
-<style>
-  .table-borderless > tbody > tr > td,
-.table-borderless > tbody > tr > th,
-.table-borderless > tfoot > tr > td,
-.table-borderless > tfoot > tr > th,
-.table-borderless > thead > tr > td,
-.table-borderless > thead > tr > th {
-    border: none;
-    text-transform: capitalize;
-}
-</style>
-  <!-- Google Font: Source Sans Pro -->
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
   <!-- Font Awesome Icons -->
   <link rel="stylesheet" href="<?php echo FRONT_SITE_PATH ?>plugins/fontawesome-free/css/all.min.css">
@@ -39,6 +27,8 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.2/css/bootstrap.css">
     <link rel="stylesheet" href="https://cdn.datatables.net/1.10.22/css/dataTables.bootstrap4.min.css">
     <link rel="stylesheet" href="https://cdn.datatables.net/fixedheader/3.1.7/css/fixedHeader.bootstrap4.min.css"> 
+      <link rel="stylesheet" href="<?php echo FRONT_SITE_PATH?>plugins/datatables-responsive/css/responsive.bootstrap4.min.css">
+
      <!-- Select2 -->
   <link rel="stylesheet" href="<?php echo FRONT_SITE_PATH?>plugins/select2/css/select2.min.css">
   <link rel="stylesheet" href="<?php echo FRONT_SITE_PATH?>plugins/select2-bootstrap4-theme/select2-bootstrap4.min.css">

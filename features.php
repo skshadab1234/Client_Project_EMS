@@ -66,7 +66,7 @@
               </div>
               <!-- /.card-header -->
               <div class="card-body table-responsive">
-               <table id="example" class=" display text-center table table-striped projects" style="width:100%">
+               <table id="example" class="table  dataTable no-footer dtr-inline collapsed" role="grid" aria-describedby="example1_info" style="width:100%">
               <thead>
                   <tr>
                       <th style="width: 5%" >Employee ID</th>
@@ -82,7 +82,7 @@
            <?php
             foreach ($get_employee_details as $key => $value) {
               ?>
-                <tr>
+                <tr role="row" class="odd">
                   <td><?= $value['id'] ?></td>
                   <td>
                     <img src="<?php echo FRONT_SITE_PATH.'media/employee_profile/'.$value['emp_image'] ?>"  class="brand-image img-circle elevation-3" style="width:4rem;height:4rem;opacity: .8">
@@ -652,7 +652,7 @@ if(mysqli_num_rows(mysqli_query($con,$sql))>0){
             <!-- /.card -->
       <input type="hidden" id="add_more" value="1"/>
     </div>
-    <?php
+   <?php
       }elseif (isset($_GET['action2']) && $_GET['action2']!=''  && $_GET['action2']=='view_employee' && isset($_GET['id']) && $_GET['id']>0) {
         $id = get_safe_value($_GET['id']);
         $get_employee_detailsByid = get_employee_detailsByid($id);
@@ -662,6 +662,22 @@ if(mysqli_num_rows(mysqli_query($con,$sql))>0){
           redirect("index");
         }
         ?>
+        <style>
+          th
+          {
+            color: #6d706f;
+          }
+          .card-header h4 {font-weight: 700;color: #1b211f}
+
+          .table-bordered > tbody > tr > td,
+          .table-bordered > tbody > tr > th,
+          .table-bordered > tfoot > tr > td,
+          .table-bordered > tfoot > tr > th,
+          .table-bordered > thead > tr > td,
+          .table-bordered > thead > tr > th {
+              text-transform: capitalize;
+          }
+        </style>
         <div class="container"  >
           <section class="content-header">
             <div class="card-header">
@@ -698,14 +714,14 @@ if(mysqli_num_rows(mysqli_query($con,$sql))>0){
                             </div>
                         </div>
                         <div class="col-sm-12 col-md-12">
-                          <div class="card-header">
-                            <H4>Personal Details</H4>
+                          <div class="card-header bg-danger">
+                            <H4 class="text-white">Personal Details</H4>
                           </div>
-                          <table class="table  table-borderless text-center" style="width:100%">
+                          <table class="table table-bordered table-striped text-center" style="width:100%">
                           <thead>
                               <tr>
-                                  <th>Employee Name/DOB</th>
-                                  <td ><?= $get_employee_detailsByid['emp_name'] ?> /  <?= $get_employee_detailsByid['emp_dob'] ?></td>
+                                  <th width="50%">Employee Name/DOB</th>
+                                  <td width="50%"><?= $get_employee_detailsByid['emp_name'] ?> /  <?= $get_employee_detailsByid['emp_dob'] ?></td>
                               </tr>
 
                               <tr>
@@ -739,35 +755,35 @@ if(mysqli_num_rows(mysqli_query($con,$sql))>0){
                           </thead>
                            </table> 
 
-                         <div class="card-header">
-                            <H4>Family Details</H4>
+                         <div class="card-header bg-success">
+                            <H4 class="text-white">Family Details</H4>
                           </div>
-                          <table class="table  table-borderless text-center" style="width:100%">
+                          <table class="table  table-bordered table-striped  text-center" style="width:100%">
                           <thead>
                               <tr>
-                                  <th >father name/DOB/age</th>
-                                  <td ><?= $get_employee_detailsByid['emp_father_name'] ?> / <?= $get_employee_detailsByid['emp_father_dob'] ?> / <?= $get_employee_detailsByid['emp_father_age'].' years ' ?></td>
+                                  <th width="50%">Father Name / DOB / Age</th>
+                                  <td width="50%"><?= $get_employee_detailsByid['emp_father_name'] ?> / <?= $get_employee_detailsByid['emp_father_dob'] ?> / <?= $get_employee_detailsByid['emp_father_age'].' years ' ?></td>
                               </tr>
 
                               <!-- Mother -->
                               <tr>
-                                  <th >Mother name/DOB/age</th>
+                                  <th >Mother Name / DOB / Age</th>
                                   <td ><?= $get_employee_detailsByid['emp_mother_name'] ?> / <?= $get_employee_detailsByid['emp_mother_dob'] ?> / <?= $get_employee_detailsByid['emp_mother_age'].' years ' ?></td>
                               </tr>
 
                               <!-- wife -->
                               <tr>
-                                  <th >wife name/DOB/age</th>
-                                  <td ><?= $get_employee_detailsByid['emp_wife_name'] ?>/<?= $get_employee_detailsByid['emp_wife_dob'] ?>/<?= $get_employee_detailsByid['emp_wife_age'].' years ' ?></td>
+                                  <th >Wife Name / DOB / Age</th>
+                                  <td ><?= $get_employee_detailsByid['emp_wife_name'] ?> / <?= $get_employee_detailsByid['emp_wife_dob'] ?> / <?= $get_employee_detailsByid['emp_wife_age'].' years ' ?></td>
                               </tr>
                           </thead>
                            </table> 
 
 
-                          <div class="card-header">
-                            <H4><?= $totalChildofEmpByid; ?> Children</H4>
+                          <div class="card-header bg-primary">
+                            <H4 class="text-white"><?= $totalChildofEmpByid; ?> Children</H4>
                           </div>
-                          <table class="table  table-borderless text-center" style="width:100%">
+                          <table class="table  table-bordered table-striped  text-center" style="width:100%">
                           <thead>
                            <?php
                               $i = 0;
@@ -775,8 +791,8 @@ if(mysqli_num_rows(mysqli_query($con,$sql))>0){
                                   $i++;
                                   ?>
                                 <tr>
-                                  <th >Child name <?= $i ?>/DOB/age</th>
-                                  <td ><?= $list['emp_child_name'] ?>/<?= $list['emp_child_dob'] ?>/<?= $list['emp_child_age'].' years ' ?></td>
+                                  <th width="50%">Child Name <?= $i ?> / DOB / Age</th>
+                                  <td width="50%"><?= $list['emp_child_name'] ?> / <?= $list['emp_child_dob'] ?> / <?= $list['emp_child_age'].' years ' ?></td>
                               </tr>
                                 <?php
                                 }
@@ -784,18 +800,18 @@ if(mysqli_num_rows(mysqli_query($con,$sql))>0){
                            </thead>
                          </table> 
                             
-                           <div class="card-header">
-                            <H4>Government ID</H4>
+                           <div class="card-header bg-info">
+                            <H4 class="text-white">Government ID</H4>
                           </div>
-                          <table class="table  table-borderless text-center" style="width:100%">
+                          <table class="table  table-bordered table-striped  text-center" style="width:100%">
                           <thead>
                               <tr>
-                                  <th width="30%">Provident Fund/Universal Account Number</th>
-                                  <td ><?= $get_employee_detailsByid['pf_no_uan_no'] ?></td>
+                                  <th width="50%">Provident Fund/Universal Account Number</th>
+                                  <td width="50%"><?= $get_employee_detailsByid['pf_no_uan_no'] ?></td>
                               </tr>
 
                               <tr>
-                                  <th>Employee State Insurance Corporation</th>
+                                  <th >Employee State Insurance Corporation</th>
                                   <td ><?= $get_employee_detailsByid['esic_no'] ?></td>
                               </tr>
                               <tr>
@@ -803,35 +819,35 @@ if(mysqli_num_rows(mysqli_query($con,$sql))>0){
                                   <td ><?= $get_employee_detailsByid['emp_adhar_no'] ?></td>
                               </tr>
                               <tr>
-                                  <th >Election id no</th>
+                                  <th >Election Id No</th>
                                   <td ><?= $get_employee_detailsByid['emp_election_id_no'] ?></td>
                               </tr>
                               <tr>
-                                  <th >passport no</th>
+                                  <th >Passport No</th>
                                   <td ><?= $get_employee_detailsByid['emp_passport_no'] ?></td>
                               </tr>
                               <tr>
-                                  <th >Pan card no</th>
+                                  <th >Pan Card No</th>
                                   <td ><?= $get_employee_detailsByid['emp_pan_no'] ?></td>
                               </tr>
                                 </thead>
                            </table>
 
-                          <div class="card-header">
-                            <H4>Bank Details</H4>
+                          <div class="card-header bg-danger">
+                            <H4 class="text-white">Bank Details</H4>
                           </div>
-                          <table class="table  table-borderless text-center" style="width:100%">
+                          <table class="table  table-bordered table-striped  text-center" style="width:100%">
                           <thead>
                               <tr>
-                                  <th >Bank Account holder name</th>
-                                  <td ><?= $get_employee_detailsByid['emp_name_of_bank_account_holder'] ?></td>
+                                  <th width="50%">Bank Account Holder Name</th>
+                                  <td width="50%"><?= $get_employee_detailsByid['emp_name_of_bank_account_holder'] ?></td>
                               </tr>
                               <tr>
-                                  <th >Bank account no</th>
+                                  <th >Bank Account No</th>
                                   <td ><?= $get_employee_detailsByid['emp_bank_account_no'] ?></td>
                               </tr>
                               <tr>
-                                  <th >ifsc code</th>
+                                  <th >IFSC Code</th>
                                   <td ><?= $get_employee_detailsByid['emp_bank_ifsc_code'] ?></td>
                               </tr>
                           </thead>
@@ -848,7 +864,7 @@ if(mysqli_num_rows(mysqli_query($con,$sql))>0){
          </div>    
         <?php
       }else
-      { redirect("index"); }
+      { redirect(FRONT_SITE_PATH); }
     ?>
 
 
@@ -858,10 +874,7 @@ if(mysqli_num_rows(mysqli_query($con,$sql))>0){
 include 'reuse_files/footer.php';
 ?>
 
-
-
-
-  <script>
+<script>
 $(document).ready(function() {
     $('#example').DataTable( {
         "fixedHeader": true,
