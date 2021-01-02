@@ -86,7 +86,7 @@ $(function () {
       },
       location: {
         required: true,
-        rangelength: [6, 50]
+        rangelength: [3, 50]
       },
       pf_no_uan_no: {
         required: true,

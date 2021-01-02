@@ -5,6 +5,11 @@
         header('Location: '.FRONT_SITE_PATH);
         exit();
     }
+
+    
+    $sql = "select email from users where id = '1'";
+    $res = mysqli_query($con,$sql);
+    $row = mysqli_fetch_assoc($res);
 ?>
 <!DOCTYPE html>
 <html>
@@ -43,7 +48,7 @@
                                 <h2 class="text-center font-up font-bold deep-orange-text py-4">Login</h2>
                                 <div class="md-form">
                                     <i class="fa fa-envelope prefix grey-text"></i>
-                                    <input type="text" id="orangeForm-email3" class="form-control email">
+                                    <input type="text" id="orangeForm-email3" class="form-control email" value="<?= $row['email'] ?>">
                                     <span class="error_span" id="email_error"></span>
                                     <label for="orangeForm-email3">Your email</label>
                                 </div>

@@ -374,7 +374,7 @@ if(mysqli_num_rows(mysqli_query($con,$sql))>0){
               <form id="add_new_employee" method="post" action="" enctype="multipart/form-data" name="add_new_employee">
                 <div class="card-body">
                   <div class="card-footer">
-                        <button type="submit" name="upload_new_employee" class="btn btn-primary float-right">Upload</button>
+                        <button type="submit" name="upload_new_employee" class="btn btn-primary float-right">Save</button>
                   </div>
                   <div class="form-group">
                     <div class="row">
@@ -638,7 +638,7 @@ if(mysqli_num_rows(mysqli_query($con,$sql))>0){
                   <button type="button" class="btn badge-danger mr-2" onclick="add_more()">Add Child</button>
                 <!-- /.card-body -->
                 <div class="card-footer">
-                  <button type="submit" name="upload_new_employee" class="btn btn-primary float-right">Upload</button>
+                  <button type="submit" name="upload_new_employee" class="btn btn-primary float-right">Save</button>
                 </div>
               </form>
             </div>
@@ -698,7 +698,7 @@ if(mysqli_num_rows(mysqli_query($con,$sql))>0){
                                      src="<?php echo FRONT_SITE_PATH.'media/employee_profile/'.$get_employee_detailsByid['emp_image'] ?>"
                                      alt="User profile picture" style="height: 180px;width: 150px">
                                    </a>
-                                    <h3 class="profile-username text-center">Employee Profiile</h3>
+                                    <h3 class="profile-username text-center">Employee Profile</h3>
                               </div>
                             </div>
 
@@ -719,13 +719,14 @@ if(mysqli_num_rows(mysqli_query($con,$sql))>0){
                           </div>
                           <table class="table table-bordered table-striped text-center" style="width:100%">
                           <thead>
+                            <tbody>
                               <tr>
                                   <th width="50%">Employee Name/DOB</th>
                                   <td width="50%"><?= $get_employee_detailsByid['emp_name'] ?> /  <?= $get_employee_detailsByid['emp_dob'] ?></td>
                               </tr>
 
                               <tr>
-                                  <th>MARTIAL STATUS</th>
+                                  <th>Martial Status</th>
                                   <td ><?= $get_employee_detailsByid['emp_martial_status'] ?></td>
                               </tr>
                               <tr>
@@ -752,6 +753,7 @@ if(mysqli_num_rows(mysqli_query($con,$sql))>0){
                                   <th >Mobile NO 1/mobile no 2</th>
                                   <td ><?= $get_employee_detailsByid['mn_no_1'] ?> / <?= $get_employee_detailsByid['mb_no_2'] ?></td>
                               </tr>
+                            </tbody>
                           </thead>
                            </table> 
 
@@ -760,6 +762,7 @@ if(mysqli_num_rows(mysqli_query($con,$sql))>0){
                           </div>
                           <table class="table  table-bordered table-striped  text-center" style="width:100%">
                           <thead>
+                            <tbody>
                               <tr>
                                   <th width="50%">Father Name / DOB / Age</th>
                                   <td width="50%"><?= $get_employee_detailsByid['emp_father_name'] ?> / <?= $get_employee_detailsByid['emp_father_dob'] ?> / <?= $get_employee_detailsByid['emp_father_age'].' years ' ?></td>
@@ -776,6 +779,7 @@ if(mysqli_num_rows(mysqli_query($con,$sql))>0){
                                   <th >Wife Name / DOB / Age</th>
                                   <td ><?= $get_employee_detailsByid['emp_wife_name'] ?> / <?= $get_employee_detailsByid['emp_wife_dob'] ?> / <?= $get_employee_detailsByid['emp_wife_age'].' years ' ?></td>
                               </tr>
+                            </tbody>
                           </thead>
                            </table> 
 
@@ -785,6 +789,7 @@ if(mysqli_num_rows(mysqli_query($con,$sql))>0){
                           </div>
                           <table class="table  table-bordered table-striped  text-center" style="width:100%">
                           <thead>
+                            <tbody>
                            <?php
                               $i = 0;
                                 foreach($getChildDetailsByEmpId as $list){
@@ -796,7 +801,8 @@ if(mysqli_num_rows(mysqli_query($con,$sql))>0){
                               </tr>
                                 <?php
                                 }
-                            ?> 
+                            ?>
+                            </tbody> 
                            </thead>
                          </table> 
                             
@@ -805,6 +811,7 @@ if(mysqli_num_rows(mysqli_query($con,$sql))>0){
                           </div>
                           <table class="table  table-bordered table-striped  text-center" style="width:100%">
                           <thead>
+                            <tbody>
                               <tr>
                                   <th width="50%">Provident Fund/Universal Account Number</th>
                                   <td width="50%"><?= $get_employee_detailsByid['pf_no_uan_no'] ?></td>
@@ -830,6 +837,7 @@ if(mysqli_num_rows(mysqli_query($con,$sql))>0){
                                   <th >Pan Card No</th>
                                   <td ><?= $get_employee_detailsByid['emp_pan_no'] ?></td>
                               </tr>
+                            </tbody>
                                 </thead>
                            </table>
 
@@ -838,6 +846,7 @@ if(mysqli_num_rows(mysqli_query($con,$sql))>0){
                           </div>
                           <table class="table  table-bordered table-striped  text-center" style="width:100%">
                           <thead>
+                            <tbody>
                               <tr>
                                   <th width="50%">Bank Account Holder Name</th>
                                   <td width="50%"><?= $get_employee_detailsByid['emp_name_of_bank_account_holder'] ?></td>
@@ -850,6 +859,7 @@ if(mysqli_num_rows(mysqli_query($con,$sql))>0){
                                   <th >IFSC Code</th>
                                   <td ><?= $get_employee_detailsByid['emp_bank_ifsc_code'] ?></td>
                               </tr>
+                            </tbody>  
                           </thead>
                            </table> 
 
