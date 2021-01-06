@@ -678,7 +678,7 @@ if(mysqli_num_rows(mysqli_query($con,$sql))>0){
               text-transform: capitalize;
           }
         </style>
-        <div class="container"  >
+        <div class="container-fluid"  >
           <section class="content-header">
             <div class="card-header">
                             <button type="button" class="btn btn-success float-sm-right btnsk" ><i class="fa fa-print"></i>  Print</button>
@@ -689,6 +689,12 @@ if(mysqli_num_rows(mysqli_query($con,$sql))>0){
                 <div class="col-sm-12 col-md-12">
                   <!-- jquery validation -->
                   <div class="card card-primary" id="printarea">
+          <div class="container text-center">
+            <img class="img-responsive" src="<?= FRONT_SITE_PATH.'media/av_logo.jpeg'?>" width="300px">
+            <p class="text-center text-gray" style="font-size: 12px"> 4066 Bhandup Indl. Estate Pannalal Compound LBS Marg <br> Bhandup West Mumbai 400078</p>
+          </div>
+                     <hr style="border: 1px solid;background: #000;margin: 0">
+
                       <div class="row">
                         <div class="col-sm-12  col-lg-12" style="display: flex">
                           <div class="card-body box-profile mt-2">
@@ -719,7 +725,7 @@ if(mysqli_num_rows(mysqli_query($con,$sql))>0){
                           </div>
                           <table class="table table-bordered table-striped text-center" style="width:100%">
                           <thead>
-                            <tbody>
+                             <tbody>
                               <tr>
                                   <th width="50%">Employee Name/DOB</th>
                                   <td width="50%"><?= $get_employee_detailsByid['emp_name'] ?> /  <?= $get_employee_detailsByid['emp_dob'] ?></td>
@@ -738,22 +744,22 @@ if(mysqli_num_rows(mysqli_query($con,$sql))>0){
                                   <td ><?= $get_employee_detailsByid['emp_date_of_leaving'] ?></td>
                               </tr>
                               <tr>
-                                  <th >location/site</th>
+                                  <th >Location/Site</th>
                                   <td ><?= $get_employee_detailsByid['location_site'] ?></td>
                               </tr>
                               <tr>
-                                  <th >present Address</th>
+                                  <th >Present Address</th>
                                   <td ><?= $get_employee_detailsByid['present_address'] ?> - <?= $get_employee_detailsByid['present_pincode'] ?></td>
                               </tr>
                               <tr>
-                                  <th >permament address</th>
+                                  <th >Permament address</th>
                                   <td ><?= $get_employee_detailsByid['permanent_address'] ?> - <?= $get_employee_detailsByid['permanent_pincode'] ?></td>
                               </tr>
                               <tr>
-                                  <th >Mobile NO 1/mobile no 2</th>
+                                  <th >Mobile NO 1 / Mobile No 2</th>
                                   <td ><?= $get_employee_detailsByid['mn_no_1'] ?> / <?= $get_employee_detailsByid['mb_no_2'] ?></td>
                               </tr>
-                            </tbody>
+                             </tbody> 
                           </thead>
                            </table> 
 
@@ -801,8 +807,8 @@ if(mysqli_num_rows(mysqli_query($con,$sql))>0){
                               </tr>
                                 <?php
                                 }
-                            ?>
-                            </tbody> 
+                            ?> 
+                          </tbody>
                            </thead>
                          </table> 
                             
@@ -837,8 +843,8 @@ if(mysqli_num_rows(mysqli_query($con,$sql))>0){
                                   <th >Pan Card No</th>
                                   <td ><?= $get_employee_detailsByid['emp_pan_no'] ?></td>
                               </tr>
-                            </tbody>
-                                </thead>
+                             </tbody> 
+                            </thead>
                            </table>
 
                           <div class="card-header bg-danger">
@@ -859,7 +865,7 @@ if(mysqli_num_rows(mysqli_query($con,$sql))>0){
                                   <th >IFSC Code</th>
                                   <td ><?= $get_employee_detailsByid['emp_bank_ifsc_code'] ?></td>
                               </tr>
-                            </tbody>  
+                            </tbody>
                           </thead>
                            </table> 
 
@@ -871,7 +877,7 @@ if(mysqli_num_rows(mysqli_query($con,$sql))>0){
                   </div>
                 </div>  
               </div>
-         </div>    
+         </div>        
         <?php
       }else
       { redirect(FRONT_SITE_PATH); }
