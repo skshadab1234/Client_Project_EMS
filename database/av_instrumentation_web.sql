@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jan 01, 2021 at 04:45 PM
+-- Generation Time: Jan 06, 2021 at 06:09 PM
 -- Server version: 10.1.38-MariaDB
 -- PHP Version: 7.3.2
 
@@ -109,6 +109,7 @@ CREATE TABLE `users` (
   `email` varchar(255) NOT NULL,
   `password` varchar(255) NOT NULL,
   `picture_link` varchar(255) NOT NULL,
+  `user_dob` date DEFAULT NULL,
   `status` int(1) NOT NULL DEFAULT '0',
   `added_on` datetime NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
@@ -117,8 +118,8 @@ CREATE TABLE `users` (
 -- Dumping data for table `users`
 --
 
-INSERT INTO `users` (`id`, `first_name`, `last_name`, `email`, `password`, `picture_link`, `status`, `added_on`) VALUES
-(1, 'Khan1', 'Shadab', 'shadab@gmail.com', '$2y$10$V.GI9uIumULXjgHlOedLh.7MYrJ4jExuLSshmylzXmx.ywygKzdIq', 'media/546905dse20128484.jpeg', 1, '2020-12-29 02:00:12');
+INSERT INTO `users` (`id`, `first_name`, `last_name`, `email`, `password`, `picture_link`, `user_dob`, `status`, `added_on`) VALUES
+(1, 'Khan1', 'Shadab', 'shadab@gmail.com', '$2y$10$H0MfF5eIwvAw0VpCF/ruTe/O9BgWwpLAieDi4k4uD3hp3JNfA4mea', 'media/546905dse20128484.jpeg', '1990-03-04', 1, '2020-12-29 02:00:12');
 
 --
 -- Indexes for dumped tables
