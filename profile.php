@@ -1,6 +1,6 @@
 <?php
   include 'reuse_files/header.php';
-  $sql = "SELECT status FROM users WHERE id = {$admin['id']}"; 
+  $sql = "SELECT status,user_dob FROM users WHERE id = {$admin['id']}"; 
   $res = mysqli_query($con,$sql);
   $readonly = '';
   $dis_able = '';
@@ -11,6 +11,9 @@
   		$dis_able = "disabled";
   	}
   }
+
+
+  $user_dob = explode('-',$row['user_dob']);
 ?>
 
  <div class="content-wrapper">
@@ -86,6 +89,80 @@
                         </div>
                       </div>
 
+
+                      <div class="form-group row">
+                        <label for="inputName2" class="col-sm-2 col-form-label">DOB</label>
+                        <div class="col-sm-2">
+                          <select name="day" class="form-input select2" style="width: 100%;">
+                            <option value="" disabled selected="">Day</option>
+                            <?php
+                              for ($i=1; $i < 32; $i++) { 
+                                if ($i == $user_dob[2]) {
+                                ?>
+                                <option value="<?= $i ?>" selected><?= $i ?></option>
+                                <?php                                                
+                              }else {
+                                ?>
+                                   <option value="<?= $i ?>" ><?= $i ?></option>
+                                <?php
+                              }
+                             }
+
+                            ?>
+                          </select>
+                        </div>
+
+
+                        <div class="col-sm-5">
+                          <select name="month" class="form-input select2" style="width: 100%;">
+                             <option value="" disabled selected>Month</option>
+                            <?php
+                                  for ($i = 0; $i < 13; $i++) {
+                                      $time = strtotime(sprintf('%d months', $i));   
+                                      $label = date('F', $time);
+                                      $value = date('n', $time);   
+                                      if ($value == $user_dob[1]) {
+                                         ?>
+                                        <option value="<?= $value ?>" selected><?= $label ?></option>
+                                        <?php                                                
+                                          }else {
+                                            ?>
+                                               <option value="<?= $value ?>" ><?= $label ?></option>
+                                            <?php
+                                        }
+                                     }
+                              ?>
+                          </select>
+                        </div>
+
+
+
+                        <div class="col-sm-3">
+                          <select name="year" class="form-input select2" style="width: 100%;">
+                             <option value="" disabled="" selected>Year</option>
+                                    <?php
+                                          define('DOB_YEAR_START', 1970);
+                                            $current_year = date('Y');
+
+                                            for ($count = $current_year; $count >= DOB_YEAR_START; $count--)
+                                            {
+
+                                                if ($count == $user_dob[0]) {
+                                                   ?>
+                                                  <option value="<?= $count ?>" selected><?= $count ?></option>
+                                                  <?php                                                
+                                                    }else {
+                                                      ?>
+                                                         <option value="<?= $count ?>" ><?= $count ?></option>
+                                                      <?php
+                                                  }
+                                            }
+
+                                    ?>
+                          </select>
+                        </div>
+                      </div>
+
                       <div class="form-group row">
                         <label for="inputName2" class="col-sm-2 col-form-label">Profile</label>
                         <div class="col-sm-10">
@@ -125,7 +202,7 @@
                       </div>
                       <div class="form-group row">
                         <div class="offset-sm-2 col-sm-10">
-                          <button type="submit" class="btn btn-danger" id="update_password">Change Password</button>
+                          <button type="submit" class="btn btn-danger success" id="update_password">Change Password</button>
                         </div>
                       </div>
                     </form>
@@ -177,6 +254,8 @@ include 'reuse_files/footer.php';
 	    else
 	    {
 	     // view uploaded file.
+       $("#updateBtn").attr("disabled",true);
+       $("#updateBtn").html("Saved").css({"background":"green","border":"none"});
 	     $("#preview").html(data).fadeIn();
 	    }
 	      },

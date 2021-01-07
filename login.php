@@ -268,7 +268,7 @@
                                 text: 'Signed in Succesfully.We are redirecting to the dashboard'
                               });
                         setTimeout(function() {
-                            window.location = '<?php echo FRONT_SITE_PATH ?>';
+                            window.location = '<?php echo FRONT_SITE_PATH.'index' ?>';
                         }, 3000);
                     }
                 }
