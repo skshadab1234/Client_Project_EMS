@@ -184,6 +184,7 @@
       $emp_wife_age = "";
       $emp_profile = "";
       $emp_signature = "";
+      $emp_adhar_copy = "";
 
 
     if(isset($_GET['id']) && $_GET['id']>0){
@@ -223,6 +224,7 @@
       $emp_wife_age = $row['emp_wife_age'];
       $emp_profile = $row['emp_image'];
       $emp_signature = $row['emp_sign_upload'];
+      $emp_adhar_copy = $row['emp_adhar_copy'];
      } 
 
 
@@ -268,6 +270,7 @@ if(isset($_POST['upload_new_employee']))
     $emp_wife_age = get_safe_value($_POST['emp_wife_age']);
     $emp_profile=rand(111111111,999999999).'_'.$_FILES['profile_upload']['name'];
     $emp_signature=rand(111111111,999999999).'_'.$_FILES['sign_upload']['name'];
+    $emp_adhar_copy=rand(111111111,999999999).'_'.$_FILES['emp_adhar_copy']['name'];
 
  if($id==''){
     $sql="select * from employees where pf_no_uan_no='$pf_no_uan_no' or esic_no='$esic_no' or mn_no_1='$mn_no_1' or mb_no_2='$mb_no_2' or emp_adhar_no='$emp_adhar_no' or emp_election_id_no='$emp_election_id_no' or emp_passport_no='$emp_passport_no' or emp_pan_no='$emp_pan_no' or emp_bank_account_no='$emp_bank_account_no'";
@@ -281,7 +284,8 @@ if(mysqli_num_rows(mysqli_query($con,$sql))>0){
     if($id==''){
        move_uploaded_file($_FILES['profile_upload']['tmp_name'],'media/employee_profile/'.$emp_profile);
        move_uploaded_file($_FILES['sign_upload']['tmp_name'],'media/employee_signature/'.$emp_signature);
-       mysqli_query($con,"insert into employees(emp_image,emp_sign_upload,emp_name,emp_dob,emp_martial_status,emp_date_of_joining,emp_date_of_leaving,location_site,pf_no_uan_no,esic_no,present_address,present_pincode,permanent_address,permanent_pincode,mn_no_1,mb_no_2,emp_adhar_no,emp_election_id_no,emp_passport_no,emp_pan_no,emp_name_of_bank_account_holder,emp_bank_account_no,emp_bank_ifsc_code,emp_father_name,emp_father_dob,emp_father_age,emp_mother_name,emp_mother_dob,emp_mother_age,emp_wife_name,emp_wife_dob,emp_wife_age,emp_status) values('$emp_profile','$emp_signature','$emp_name','$date_of_birth','$martial_status','$date_of_join','$date_of_leave','$location','$pf_no_uan_no','$esic_no','$present_address','$present_pincode','$permanent_address','$permanent_pincode','$mn_no_1','$mb_no_2','$emp_adhar_no','$emp_election_id_no','$emp_passport_no','$emp_pan_no','$emp_name_of_bank_account_holder','$emp_bank_account_no','$emp_bank_ifsc_code','$emp_father_name','$emp_father_dob','$emp_father_age','$emp_mother_name','$emp_mother_dob','$emp_mother_age','$emp_wife_name','$emp_wife_dob','$emp_wife_age',1)");
+       move_uploaded_file($_FILES['emp_adhar_copy']['tmp_name'],'media/emp_adhar_copy/'.$emp_adhar_copy);
+       mysqli_query($con,"insert into employees(emp_image,emp_sign_upload,emp_name,emp_dob,emp_martial_status,emp_date_of_joining,emp_date_of_leaving,location_site,pf_no_uan_no,esic_no,present_address,present_pincode,permanent_address,permanent_pincode,mn_no_1,mb_no_2,emp_adhar_no,emp_adhar_copy,emp_election_id_no,emp_passport_no,emp_pan_no,emp_name_of_bank_account_holder,emp_bank_account_no,emp_bank_ifsc_code,emp_father_name,emp_father_dob,emp_father_age,emp_mother_name,emp_mother_dob,emp_mother_age,emp_wife_name,emp_wife_dob,emp_wife_age,emp_status) values('$emp_profile','$emp_signature','$emp_name','$date_of_birth','$martial_status','$date_of_join','$date_of_leave','$location','$pf_no_uan_no','$esic_no','$present_address','$present_pincode','$permanent_address','$permanent_pincode','$mn_no_1','$mb_no_2','$emp_adhar_no','$emp_adhar_copy','$emp_election_id_no','$emp_passport_no','$emp_pan_no','$emp_name_of_bank_account_holder','$emp_bank_account_no','$emp_bank_ifsc_code','$emp_father_name','$emp_father_dob','$emp_father_age','$emp_mother_name','$emp_mother_dob','$emp_mother_age','$emp_wife_name','$emp_wife_dob','$emp_wife_age',1)");
         $eid=mysqli_insert_id($con);
 
         if (isset($_POST['emp_child_name']) && $_POST['emp_child_dob'] &&  $_POST['emp_child_age'] ) {
@@ -314,10 +318,20 @@ if(mysqli_num_rows(mysqli_query($con,$sql))>0){
         $emp_signature_update=", emp_sign_upload='$emp_signature'";
        }
 
+      if($_FILES['emp_adhar_copy']['name']!=''){
+        $emp_adhar_copy=rand(111111111,999999999).'_'.$_FILES['emp_adhar_copy']['name'];
+        move_uploaded_file($_FILES['emp_adhar_copy']['tmp_name'],'media/emp_adhar_copy/'.$emp_adhar_copy);
+        $emp_adhar_copy_update=", emp_adhar_copy='$emp_adhar_copy'";
+       } 
+
        $sql="update employees set emp_name ='$emp_name', emp_dob='$date_of_birth', emp_date_of_joining='$date_of_join',emp_date_of_leaving='$date_of_leave',location_site='$location',pf_no_uan_no='$pf_no_uan_no',esic_no
-       ='$esic_no',present_address='$present_address',present_pincode='$present_pincode',permanent_address='$permanent_address',permanent_pincode='$permanent_pincode',mn_no_1='$mn_no_1',mb_no_2='$mb_no_2',emp_adhar_no='$emp_adhar_no',emp_election_id_no='$emp_election_id_no',emp_passport_no='$emp_passport_no',emp_pan_no='$emp_pan_no',emp_name_of_bank_account_holder='$emp_name_of_bank_account_holder',emp_bank_account_no='$emp_bank_account_no',emp_bank_ifsc_code='$emp_bank_ifsc_code',emp_father_name='$emp_father_name',emp_father_dob='$emp_father_dob',emp_father_age='$emp_father_age',emp_mother_name='$emp_mother_name',emp_mother_dob='$emp_mother_dob',emp_mother_age='$emp_mother_age',emp_wife_name='$emp_wife_name',emp_wife_dob='$emp_wife_dob',emp_wife_age='$emp_wife_age' $emp_profile_update $emp_signature_update where id='$id'";
+       ='$esic_no',present_address='$present_address',present_pincode='$present_pincode',permanent_address='$permanent_address',permanent_pincode='$permanent_pincode',mn_no_1='$mn_no_1',mb_no_2='$mb_no_2',emp_adhar_no='$emp_adhar_no',emp_election_id_no='$emp_election_id_no',emp_passport_no='$emp_passport_no',emp_pan_no='$emp_pan_no',emp_name_of_bank_account_holder='$emp_name_of_bank_account_holder',emp_bank_account_no='$emp_bank_account_no',emp_bank_ifsc_code='$emp_bank_ifsc_code',emp_father_name='$emp_father_name',emp_father_dob='$emp_father_dob',emp_father_age='$emp_father_age',emp_mother_name='$emp_mother_name',emp_mother_dob='$emp_mother_dob',emp_mother_age='$emp_mother_age',emp_wife_name='$emp_wife_name',emp_wife_dob='$emp_wife_dob',emp_wife_age='$emp_wife_age' $emp_profile_update $emp_signature_update $emp_adhar_copy_update where id='$id'";
+
+      // echo "<pre>";
+      // print_r($sql);die();
         mysqli_query($con,$sql);
 
+      
          if (isset($_POST['emp_child_name']) && $_POST['emp_child_dob'] &&  $_POST['emp_child_age'] or $_POST['child_name_id'] ) {
           $emp_child_nameArr = $_POST['emp_child_name'];
           $emp_child_dobArr = $_POST['emp_child_dob'];
@@ -380,7 +394,7 @@ if(mysqli_num_rows(mysqli_query($con,$sql))>0){
                     <div class="row">
                       <div class="col-sm-12 col-md-6 mt-2 form-group">
                         <label for="profile_upload">Upload Profile</label>
-                        <input type="file" name="profile_upload" class="form-control" id="profile_upload" value="hello" <?php echo $image_status?>>
+                        <input type="file" name="profile_upload" class="form-control" id="profile_upload"  <?php echo $image_status?>>
                         <?php
                         if (isset($_GET['id']) && $_GET['id']>0) {
                           ?>
@@ -514,41 +528,59 @@ if(mysqli_num_rows(mysqli_query($con,$sql))>0){
                         <label for="emp_adhar_no">Adhar Card Number</label>
                         <input placeholder="Ex: 6253 6452 6458 0565" name="emp_adhar_no" class="form-control left" id="emp_adhar_no" value="<?= $emp_adhar_no ?>">
                       </div>
+                      
                       <div class="col-sm-12 col-md-6 mt-2 form-group">
-                        <label for="emp_election_id_no">Election ID Number</label>
-                        <input placeholder="Ex: M2ZX234561" name="emp_election_id_no" class="form-control left" id="emp_election_id_no" value="<?= $emp_election_id_no ?>">
+                        <label for="adhar_card_copy">Upload Adhar Card Copy</label>
+                        <input type="file" name="emp_adhar_copy" class="form-control" id="emp_adhar_copy" <?php echo $image_status?>>
+                        <?php
+                        if (isset($_GET['id']) && $_GET['id']>0) {
+                          ?>
+                           <a href="<?= FRONT_SITE_PATH.'media/emp_adhar_copy/'.$emp_adhar_copy ?>" target="_blank">
+                              <img src="<?= FRONT_SITE_PATH.'media/emp_adhar_copy/'.$emp_adhar_copy ?>" width="30px">
+                             </a>
+                          <?php
+                        }
+                        ?>
                       </div>
                     </div>
                   </div> 
 
                   <div class="form-group">
                     <div class="row">
+
+                      <div class="col-sm-12 col-md-6 mt-2 form-group">
+                        <label for="emp_election_id_no">Election ID Number</label>
+                        <input placeholder="Ex: M2ZX234561" name="emp_election_id_no" class="form-control left" id="emp_election_id_no" value="<?= $emp_election_id_no ?>">
+                      </div>
+
                       <div class="col-sm-12 col-md-6 mt-2 form-group">
                         <label for="emp_passport_no">Passport Number</label>
                         <input placeholder="Ex: JXXXXXXX" name="emp_passport_no" class="form-control left" id="emp_passport_no" value="<?= $emp_passport_no ?>">
                       </div>
-                      <div class="col-sm-12 col-md-6 mt-2 form-group">
-                        <label for="emp_pan_no">Pan Card Number</label>
-                        <input placeholder="Ex: HDIMK23456" name="emp_pan_no" class="form-control left" id="emp_pan_no" value="<?= $emp_pan_no ?>">
-                      </div>
+                      
                     </div>
                   </div>  
 
                   <div class="form-group">
                     <div class="row">
                       <div class="col-sm-12 col-md-6 mt-2 form-group">
+                        <label for="emp_pan_no">Pan Card Number</label>
+                        <input placeholder="Ex: HDIMK23456" name="emp_pan_no" class="form-control left" id="emp_pan_no" value="<?= $emp_pan_no ?>">
+                      </div>
+                      <div class="col-sm-12 col-md-6 mt-2 form-group">
                         <label for="emp_name_of_bank_account_holder">Bank Account Holder Name</label>
                         <input placeholder="Ex: SIRAJ KHAN ABDUL HAI" name="emp_name_of_bank_account_holder" class="form-control left" id="emp_name_of_bank_account_holder" value="<?= $emp_name_of_bank_account_holder ?>">
                       </div>
-                      <div class="col-sm-12 col-md-6 mt-2 form-group">
-                        <label for="emp_bank_account_no">Bank Account Number</label>
-                        <input placeholder="Ex: 68033422875" name="emp_bank_account_no" class="form-control left" id="emp_bank_account_no" value="<?= $emp_bank_account_no ?>">
-                      </div>
+                    
                     </div>
                   </div>
 
                   <div class="form-group">
                     <div class="row">
+                      <div class="col-sm-12 col-md-6 mt-2 form-group">
+                        <label for="emp_bank_account_no">Bank Account Number</label>
+                        <input placeholder="Ex: 68033422875" name="emp_bank_account_no" class="form-control left" id="emp_bank_account_no" value="<?= $emp_bank_account_no ?>">
+                      </div>
                       <div class="col-sm-12 col-md-6 mt-2 form-group">
                         <label for="emp_bank_ifsc_code">IFSC Code</label>
                         <input placeholder="Ex: MAHB00001401" name="emp_bank_ifsc_code" class="form-control left" id="emp_bank_ifsc_code" value="<?= $emp_bank_ifsc_code ?>">
@@ -696,28 +728,47 @@ if(mysqli_num_rows(mysqli_query($con,$sql))>0){
                      <hr style="border: 1px solid;background: #000;margin: 0">
 
                       <div class="row">
-                        <div class="col-sm-12  col-lg-12" style="display: flex">
-                          <div class="card-body box-profile mt-2">
-                              <div class="text-center">
-                                <a href="<?php echo FRONT_SITE_PATH.'media/employee_profile/'.$get_employee_detailsByid['emp_image'] ?>" target="_blank">
-                                  <img class="profile-user-img"
-                                     src="<?php echo FRONT_SITE_PATH.'media/employee_profile/'.$get_employee_detailsByid['emp_image'] ?>"
-                                     alt="User profile picture" style="height: 180px;width: 150px">
-                                   </a>
-                                    <h3 class="profile-username text-center">Employee Profile</h3>
+                        <div class="col-sm-12  col-lg-12" >
+                          <div class="row">
+                            <div class="col-6 col-sm-4">
+                              <div class="card-body box-profile mt-2">
+                                <div class="text-center">
+                                  <a href="<?php echo FRONT_SITE_PATH.'media/employee_profile/'.$get_employee_detailsByid['emp_image'] ?>" target="_blank">
+                                    <img class="profile-user-img"
+                                       src="<?php echo FRONT_SITE_PATH.'media/employee_profile/'.$get_employee_detailsByid['emp_image'] ?>"
+                                       alt="User profile picture" style="height: 180px;width: 150px">
+                                     </a>
+                                      <h3 class="profile-username text-center">Employee Profile</h3>
+                                </div>
                               </div>
                             </div>
 
-                            <div class="card-body box-profile mt-2">
-                              <div class="text-center">
-                                <a href="<?php echo FRONT_SITE_PATH.'media/employee_signature/'.$get_employee_detailsByid['emp_sign_upload'] ?>" target="_blank">
-                                  <img class="profile-user-img"
-                                     src="<?php echo FRONT_SITE_PATH.'media/employee_signature/'.$get_employee_detailsByid['emp_sign_upload'] ?>"
-                                     alt="User profile picture" style="height: 180px;width: 150px">
-                                </a>
-                                    <h3 class="profile-username text-center">Employee Signature</h3>
+                            <div class="col-6 col-sm-4">
+                              <div class="card-body box-profile mt-2">
+                                <div class="text-center">
+                                  <a href="<?php echo FRONT_SITE_PATH.'media/employee_signature/'.$get_employee_detailsByid['emp_sign_upload'] ?>" target="_blank">
+                                    <img class="profile-user-img"
+                                       src="<?php echo FRONT_SITE_PATH.'media/employee_signature/'.$get_employee_detailsByid['emp_sign_upload'] ?>"
+                                       alt="User profile picture" style="height: 180px;width: 150px">
+                                  </a>
+                                      <h3 class="profile-username text-center">Employee Signature</h3>
+                                </div>
                               </div>
                             </div>
+
+                            <div class="col-12 col-sm-4">
+                              <div class="card-body box-profile mt-2">
+                                <div class="text-center">
+                                  <a href="<?php echo FRONT_SITE_PATH.'media/emp_adhar_copy/'.$get_employee_detailsByid['emp_adhar_copy'] ?>" target="_blank">
+                                    <img class="profile-user-img"
+                                       src="<?php echo FRONT_SITE_PATH.'media/emp_adhar_copy/'.$get_employee_detailsByid['emp_adhar_copy'] ?>"
+                                       alt="User profile picture" style="height: 180px;width: 250px">
+                                     </a>
+                                      <h3 class="profile-username text-center">Employee Adhar Copy</h3>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
                         </div>
                         <div class="col-sm-12 col-md-12">
                           <div class="card-header bg-danger">
@@ -915,7 +966,7 @@ $(document).ready(function() {
       var add_more=jQuery('#add_more').val();
       add_more++;
       jQuery('#add_more').val(add_more);
-      var html='<div class="form-group" id="box'+add_more+'"><div class="row"><div class="col-sm-12 col-md-4 mt-2 form-group"><label for="emp_child_name">Employee Child Name</label><input placeholder="Ex: Sohail Khan" name="emp_child_name[]" class="form-control left" id="emp_child_name"></div><div class="col-sm-12 col-md-3 mt-2 form-group"><label for="emp_child_dob">Employee Child DOB</label><input placeholder="Ex: 2010/12/25" name="emp_child_dob[]" class="form-control left" id="emp_child_dob"></div><div class="col-sm-12 col-md-3 mt-2 form-group"><label for="emp_child_age">Employee Child Age</label><input placeholder="Ex: 15" name="emp_child_age[]" class="form-control left" id="emp_child_age"></div><div class="col-sm-12 col-md-2"><button type="button" class="btn badge-danger float-right" style="margin-top:34px;" onclick=remove_more("'+add_more+'")>Remove</button></div></div></div>';
+      var html='<div class="form-group" id="box'+add_more+'"><div class="row"><div class="col-sm-12 col-md-4 mt-2 form-group"><label for="emp_child_name">Employee Child Name</label><input placeholder="Ex: Sohail Khan" name="emp_child_name[]" class="form-control left" id="emp_child_name" required></div><div class="col-sm-12 col-md-3 mt-2 form-group"><label for="emp_child_dob">Employee Child DOB</label><input placeholder="Ex: 2010/12/25" name="emp_child_dob[]" class="form-control left" id="emp_child_dob"></div><div class="col-sm-12 col-md-3 mt-2 form-group"><label for="emp_child_age">Employee Child Age</label><input placeholder="Ex: 15" name="emp_child_age[]" class="form-control left" id="emp_child_age"></div><div class="col-sm-12 col-md-2"><button type="button" class="btn badge-danger float-right" style="margin-top:34px;" onclick=remove_more("'+add_more+'")>Remove</button></div></div></div>';
       jQuery('#add_new_child_field').append(html);
     }
 

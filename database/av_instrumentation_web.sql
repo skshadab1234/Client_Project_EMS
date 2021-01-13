@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jan 06, 2021 at 06:09 PM
+-- Generation Time: Jan 13, 2021 at 09:38 AM
 -- Server version: 10.1.38-MariaDB
 -- PHP Version: 7.3.2
 
@@ -47,6 +47,7 @@ CREATE TABLE `employees` (
   `mn_no_1` varchar(255) NOT NULL,
   `mb_no_2` varchar(255) NOT NULL,
   `emp_adhar_no` varchar(255) NOT NULL,
+  `emp_adhar_copy` varchar(255) NOT NULL,
   `emp_election_id_no` varchar(255) NOT NULL,
   `emp_passport_no` varchar(255) NOT NULL,
   `emp_pan_no` varchar(255) NOT NULL,
@@ -69,8 +70,9 @@ CREATE TABLE `employees` (
 -- Dumping data for table `employees`
 --
 
-INSERT INTO `employees` (`id`, `emp_image`, `emp_sign_upload`, `emp_name`, `emp_dob`, `emp_martial_status`, `emp_date_of_joining`, `emp_date_of_leaving`, `location_site`, `pf_no_uan_no`, `esic_no`, `present_address`, `present_pincode`, `permanent_address`, `permanent_pincode`, `mn_no_1`, `mb_no_2`, `emp_adhar_no`, `emp_election_id_no`, `emp_passport_no`, `emp_pan_no`, `emp_name_of_bank_account_holder`, `emp_bank_account_no`, `emp_bank_ifsc_code`, `emp_father_name`, `emp_father_dob`, `emp_father_age`, `emp_mother_name`, `emp_mother_dob`, `emp_mother_age`, `emp_wife_name`, `emp_wife_dob`, `emp_wife_age`, `emp_status`) VALUES
-(1, '392433077_1.jpg', '874389156_AdyshevMM-signature.png', 'SHADAB Alam', '2000-04-30', 'married', '2021-01-20', '2021-11-15', 'mumbai', 'MAHB0000000001221213232', '3100000011A2SASASAS2', 'Sayeed Manzil, Room no 104,\r\nKasua, Mumbra', 400612, 'Sayeed Manzil, Room no 104,\r\nKasua, Mumbra', 400612, '9168754858', '9168754858', '916875485812', 'M2KLM01234', 'J21K821', 'HDIPS12345', 'SHADABALAM JAMAL AHMED KHAN', '68033277585', 'MAHB00001401', 'JAMAL AHMED', '1975-11-20', 55, 'JASIMUNNISA', '1977-04-25', 53, 'XYZABC', '2002-12-21', 18, 1);
+INSERT INTO `employees` (`id`, `emp_image`, `emp_sign_upload`, `emp_name`, `emp_dob`, `emp_martial_status`, `emp_date_of_joining`, `emp_date_of_leaving`, `location_site`, `pf_no_uan_no`, `esic_no`, `present_address`, `present_pincode`, `permanent_address`, `permanent_pincode`, `mn_no_1`, `mb_no_2`, `emp_adhar_no`, `emp_adhar_copy`, `emp_election_id_no`, `emp_passport_no`, `emp_pan_no`, `emp_name_of_bank_account_holder`, `emp_bank_account_no`, `emp_bank_ifsc_code`, `emp_father_name`, `emp_father_dob`, `emp_father_age`, `emp_mother_name`, `emp_mother_dob`, `emp_mother_age`, `emp_wife_name`, `emp_wife_dob`, `emp_wife_age`, `emp_status`) VALUES
+(1, '392433077_1.jpg', '874389156_AdyshevMM-signature.png', 'SHADAB Alam', '2000-04-30', 'married', '2021-01-20', '2021-11-15', 'mumbai', 'MAHB0000000001221213232', '3100000011A2SASASAS2', 'Sayeed Manzil, Room no 104,\r\nKasua, Mumbra', 400612, 'Sayeed Manzil, Room no 104,\r\nKasua, Mumbra', 400612, '9168754858', '9168754858', '916875485812', '901931080_shadab_adahar.jpg', 'M2KLM01234', 'J21K821', 'HDIPS12345', 'SHADABALAM JAMAL AHMED KHAN', '68033277585', 'MAHB00001401', 'JAMAL AHMED', '1975-11-20', 55, 'JASIMUNNISA', '1977-04-25', 53, 'XYZABC', '2002-12-21', 18, 1),
+(2, '162314718_DSE20128484.jpeg', '407911260_Religious Minorty Candidate.jpg', 'Saluhudiin', '2020-10-20', 'married', '2020-10-20', '2020-12-30', 'mumbai', 'SAHB0000000001221212144', '3100000011A2SASASAS3', 'Sayeed Manzil, Room no 104,\\r\\nKasua, Mumbra', 400612, 'Sayeed Manzil, Room no 104,\\r\\nKasua, Mumbra', 400612, '9168754851', '9168754851', '916875485112', '', '9168754851', '1245782', '9168754851', 'SHADABALAM JAMAL AHMED KHAN', '9168754851', 'MAHB00001401', 'JAMAL AHMED', '1975-12-21', 52, 'Shaheen', '1973-12-21', 56, 'XYZABC', '2020-12-21', 56, 1);
 
 -- --------------------------------------------------------
 
@@ -119,7 +121,7 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `first_name`, `last_name`, `email`, `password`, `picture_link`, `user_dob`, `status`, `added_on`) VALUES
-(1, 'Khan1', 'Shadab', 'shadab@gmail.com', '$2y$10$H0MfF5eIwvAw0VpCF/ruTe/O9BgWwpLAieDi4k4uD3hp3JNfA4mea', 'media/546905dse20128484.jpeg', '1990-03-04', 1, '2020-12-29 02:00:12');
+(1, 'Khan1sa', 'Shadab', 'shadab@gmail.com', '$2y$10$Dc5pBgwGISWHv5shgSElyu1u9pXBtMeTa9xls/O9LoI1U5/PQQ6k6', 'media/822813348_DSE20128484.jpeg', '2000-03-31', 1, '2020-12-29 02:00:12');
 
 --
 -- Indexes for dumped tables
@@ -151,13 +153,13 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `employees`
 --
 ALTER TABLE `employees`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `employee_child_details`
 --
 ALTER TABLE `employee_child_details`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT for table `users`

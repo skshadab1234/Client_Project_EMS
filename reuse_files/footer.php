@@ -116,7 +116,7 @@ $(function () {
         required: true,
         phoneUS: true
       },
-      mn_no_2: {
+      mb_no_2: {
         required: true,
         phoneUS: true
       },
@@ -124,9 +124,8 @@ $(function () {
         required: true,
         rangelength: [12,12]
       },
-      emp_adhar_no: {
-        required: true,
-        rangelength: [12,12]
+      emp_adhar_copy: {
+        extension: "png|jpg|jpeg|pdf"
       },
       emp_election_id_no:{
         required: true,
@@ -189,12 +188,15 @@ $(function () {
         rangelength: [2,2]
       },
       emp_child_name: {
+        required: true,
         rangelength: [6,50]
       },
       emp_child_dob: {
+        required: true,
         dateISO: true
       },
       emp_child_age: {
+        required: true,
         rangelength: [2,2]
       },
     },
@@ -206,6 +208,10 @@ $(function () {
       sign_upload: {
         required: "Please upload Signature Of Employee",
         extension: "Please Select .png,.jpg,.jpeg only..."
+      },
+      emp_adhar_copy: {
+        required: "Please upload Copy of Adhar card Of Employee",
+        extension: "Please Select .png,.jpg,.jpeg,.pdf only..."
       },
       emp_name:{
         rangelength: "Enter minimum 6 letter Long Name."
